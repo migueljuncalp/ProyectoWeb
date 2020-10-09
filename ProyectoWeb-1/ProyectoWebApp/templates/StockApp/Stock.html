@@ -1,0 +1,55 @@
+{% extends "ProyectoWebApp/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div style="background-color: rgba(0, 0, 0, 0.80); padding: 30px; margin: 30px; color: white;" >
+    <form method='POST' action=''>{% csrf_token %}
+        {{form|crispy}}
+            <br>
+            <input class='btn btn-success' type="submit" value='BUSCAR'/>
+    </form>
+    <br>
+    <center>
+
+        
+    {% if stock %}
+    <h1>{{title}}</h1>
+    <table class="table table-bordered" col>
+        <thead style="background-color: rgba(0,0,0, 1); color: white;">
+            <tr>
+                <td>Nombre Producto</td>
+                <td>Categoria</td>
+                <td>Cantidad</td>
+                <td>Fecha de compra</td>
+            
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in stock %}
+            <tr>
+                <td style="color: white;"><center>{{product.nombre_producto}}</center></td>
+                <td style="color: white;"><center>{{product.categoria}}</center></td>
+                <td style="color: white;"><center>{{product.cantidad}}</center></td>
+                <td style="color: white;"><center>{{product.fecha_stock}}</center></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    {% else %}
+        <h1>No hay productos en stock</h1> 
+    {% endif %}
+
+
+    </center>    
+</div>
+<center>
+    <div style=" padding: 40px;" >
+        <a href="{% url 'addToStock' %}" class="btn btn-primary btn-lg active" role="button">Añadir Producto</a>
+    </div>
+</center>
+
+{% endblock %}

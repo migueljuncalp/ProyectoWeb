@@ -1,0 +1,12 @@
+{% extends "ProyectoWebApp/base.html" %}
+{% load static %}
+
+{% block content %}
+    <form method="POST" class="post" style="background-color:rgba(0, 0, 0, 0.8); color: white; padding: 40px; margin: 20px;">  
+        {% csrf_token %}
+        <h2>Desea eliminar el registro de {{categoria.categoria}}</h2>
+
+        <button class="btn btn-danger" type="submit">Si,eliminar</button>
+        <a class="btn btn-default" href="{% url 'categorias' %}">Cancelar</a>
+    </form>
+{% endblock %}
