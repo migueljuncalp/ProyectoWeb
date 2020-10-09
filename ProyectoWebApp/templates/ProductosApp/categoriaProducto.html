@@ -1,0 +1,47 @@
+{% extends "ProyectoWebApp/base.html" %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contabilidad</title>
+</head>
+    <div style="background-color: rgba(0,0,0, 0.70); padding:40px; margin: 20px; color: white;">
+        {% if categorias %}
+        <h2 style="color: white;"> Categorías de productos</h2>
+    <table class="table table-bordered" col>
+        <thead style="background-color: rgba(0,0,0, 1); color: white;">
+            <tr>
+                <td>#</td>
+                <td>Categoría</td>
+                <td>Opciones</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categoria in categorias %}
+            <tr>
+                <td style="color: white;"><center>{{categoria.id}}</center></td>
+                <td style="color: white;"><center>{{categoria.categoria}}</center></td>
+                <td>
+                    <a class="btn btn-primary" href="{% url 'categoriaEditar' categoria.id %}"> Editar</a>
+                    <a class="btn btn-danger" href="{% url 'categoriaDelete' categoria.id %}"> Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+                <h1>No hay categorias registradas</h1> 
+            {% endif %}
+        </tbody>
+    </table>
+    </div>
+
+        <center>
+            <div style=" padding: 40px;" >
+                <a href="{% url 'categoriaForm' %}" class="btn btn-primary btn-lg active" role="button">Crear una categoria</a>
+            </div>
+        </center>
+</html>
+{% endblock %}
